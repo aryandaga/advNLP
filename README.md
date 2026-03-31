@@ -359,10 +359,9 @@ Post-LoRA overall DirectBias drops (representations become less gender-loaded) b
 
 ### Visualizations
 
-![Full summary dashboard](results/llama_full_summary.png)
-![SST-2 accuracy comparison](results/llama_sst2_comparison.png)
-![CrowS-Pairs SPS comparison](results/llama_sps_comparison.png)
-![DirectBias comparison](results/llama_directbias_comparison.png)
+![Accuracy vs Bias](results/llama_accuracy_vs_bias.png)
+![DirectBias stereo vs anti](results/llama_directbias.png)
+![Bias drift summary](results/llama_bias_drift.png)
 
 ---
 
