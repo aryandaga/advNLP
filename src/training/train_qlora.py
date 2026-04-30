@@ -1,6 +1,6 @@
 """
 QLoRA Experiment: Bias Drift in OPT-1.3B (4-bit) After Fine-Tuning on SST-2
-Run with: ../venv/Scripts/python run_qlora.py
+Run with: python src/training/train_qlora.py
 """
 import os, sys, json, torch, numpy as np, pandas as pd
 import matplotlib
@@ -14,7 +14,14 @@ from transformers import (
 from peft import LoraConfig, get_peft_model, TaskType, prepare_model_for_kbit_training
 from datasets import load_dataset
 
-os.makedirs("../results", exist_ok=True)
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+PROCESSED_DIR = os.path.join(ROOT_DIR, "results", "processed", "opt_1.3b")
+FIGURES_DIR = os.path.join(ROOT_DIR, "results", "figures", "exploratory")
+ADAPTER_DIR = os.path.join(ROOT_DIR, "artifacts", "adapters", "opt_1.3b", "qlora_adapter")
+
+os.makedirs(PROCESSED_DIR, exist_ok=True)
+os.makedirs(FIGURES_DIR, exist_ok=True)
+os.makedirs(ADAPTER_DIR, exist_ok=True)
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 MODEL_NAME = "facebook/opt-1.3b"
@@ -153,7 +160,7 @@ train_tok.set_format("torch")
 # ── 8. Fine-tune ──────────────────────────────────────────────────────────────
 print("\nFine-tuning with QLoRA (2 epochs, lr=2e-4, paged_adamw_8bit)...")
 args = TrainingArguments(
-    output_dir="../results/qlora_adapter",
+    output_dir=ADAPTER_DIR,
     num_train_epochs=2,
     per_device_train_batch_size=8,
     gradient_accumulation_steps=2,
@@ -175,8 +182,8 @@ trainer = Trainer(
 result = trainer.train()
 print(f"Training loss: {result.training_loss:.4f}")
 
-qlora_model.save_pretrained("../results/qlora_adapter")
-tokenizer.save_pretrained("../results/qlora_adapter")
+qlora_model.save_pretrained(ADAPTER_DIR)
+tokenizer.save_pretrained(ADAPTER_DIR)
 
 # ── 9. Post-QLoRA evaluation ──────────────────────────────────────────────────
 print("\n" + "="*55)
@@ -187,13 +194,13 @@ qlora_sst2 = eval_sst2(qlora_model, tokenizer, sst2_eval, "(post-QLoRA)")
 qlora_bbq  = eval_bbq(qlora_model, tokenizer, bbq_ambiguous, bbq_disambig, "(post-QLoRA)")
 
 # ── 10. Results + cross-experiment comparison ─────────────────────────────────
-with open("../results/qlora_results.json", "w") as f:
+with open(os.path.join(PROCESSED_DIR, "qlora_results.json"), "w") as f:
     json.dump({"baseline_sst2": baseline_sst2, "qlora_sst2": qlora_sst2,
                "baseline_bbq": baseline_bbq,   "qlora_bbq": qlora_bbq}, f, indent=2)
 
 # Load LoRA results if available
 try:
-    with open("../results/lora_results.json") as f:
+    with open(os.path.join(PROCESSED_DIR, "lora_results.json")) as f:
         lr = json.load(f)
     rows = {
         "fp16 Baseline": {"SST-2 Acc": lr["baseline_sst2"], **lr["baseline_bbq"]},
@@ -209,14 +216,14 @@ except FileNotFoundError:
         "Post-QLoRA":    {"SST-2 Acc": qlora_sst2,    **qlora_bbq},
     }
     has_lora = False
-    print("\n(Run run_lora.py first for full comparison.)")
+    print("\n(Run python src/training/train_lora.py first for full comparison.)")
 
 df = pd.DataFrame(rows).T
 print("\n" + "="*70)
 print("FULL COMPARISON TABLE")
 print("="*70)
 print(df.to_string())
-df.to_csv("../results/qlora_results.csv")
+df.to_csv(os.path.join(PROCESSED_DIR, "qlora_results.csv"))
 
 # ── 11. Plots ──────────────────────────────────────────────────────────────────
 if has_lora:
@@ -255,7 +262,8 @@ else:
             ax.axhline(0, color="gray", ls="--")
 
 plt.tight_layout()
-out_path = "../results/lora_vs_qlora_comparison.png" if has_lora else "../results/qlora_bias_plot.png"
+out_name = "opt_lora_vs_qlora_comparison.png" if has_lora else "opt_qlora_bias_plot.png"
+out_path = os.path.join(FIGURES_DIR, out_name)
 plt.savefig(out_path, dpi=150, bbox_inches="tight")
 print(f"Plot saved -> {out_path}")
 print("\nDone.")

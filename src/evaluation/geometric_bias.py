@@ -23,9 +23,14 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 from sklearn.decomposition import PCA
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-RESULTS_DIR = os.path.join(os.path.dirname(__file__), "..", "results")
-os.makedirs(RESULTS_DIR, exist_ok=True)
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+PROCESSED_DIR = os.path.join(ROOT_DIR, "results", "processed", "opt_1.3b")
+FIGURES_DIR = os.path.join(ROOT_DIR, "results", "figures", "exploratory")
+ADAPTERS_DIR = os.path.join(ROOT_DIR, "artifacts", "adapters", "opt_1.3b")
+
+sys.path.insert(0, os.path.join(ROOT_DIR, "src"))
+os.makedirs(PROCESSED_DIR, exist_ok=True)
+os.makedirs(FIGURES_DIR, exist_ok=True)
 
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from peft import PeftModel
@@ -201,19 +206,19 @@ results["baseline"] = analyse_model(m, tok, "Baseline")
 free(m)
 
 # 2. Post-LoRA
-lora_path = os.path.join(RESULTS_DIR, "lora_adapter")
+lora_path = os.path.join(ADAPTERS_DIR, "lora_adapter")
 m, tok = load_lora(lora_path)
 results["post_lora"] = analyse_model(m, tok, "Post-LoRA")
 free(m)
 
 # 3. Post-QLoRA
-qlora_path = os.path.join(RESULTS_DIR, "qlora_adapter")
+qlora_path = os.path.join(ADAPTERS_DIR, "qlora_adapter")
 m, tok = load_qlora(qlora_path)
 results["post_qlora"] = analyse_model(m, tok, "Post-QLoRA")
 free(m)
 
 # ── Save JSON ────────────────────────────────────────────────────────────────
-out_path = os.path.join(RESULTS_DIR, "bolukbasi_results.json")
+out_path = os.path.join(PROCESSED_DIR, "bolukbasi_results.json")
 with open(out_path, "w") as f:
     json.dump(results, f, indent=2)
 print(f"\nSaved results to {out_path}")
@@ -233,7 +238,7 @@ ax.set_title("Bolukbasi DirectBias — OPT-1.3B\n(lower = less gender bias in re
 for b, v in zip(bars, db_vals):
     ax.text(b.get_x() + b.get_width()/2, v + 0.002, f"{v:.4f}", ha="center", fontsize=10)
 plt.tight_layout()
-plt.savefig(os.path.join(RESULTS_DIR, "bolukbasi_direct_bias.png"), dpi=150)
+plt.savefig(os.path.join(FIGURES_DIR, "opt_bolukbasi_direct_bias.png"), dpi=150)
 plt.close()
 
 # Plot 2: Per-word DirectBias heatmap
@@ -249,7 +254,7 @@ ax.set_ylabel("|cos(w, g)|")
 ax.set_title("Per-Word DirectBias by Adaptation Method")
 ax.legend()
 plt.tight_layout()
-plt.savefig(os.path.join(RESULTS_DIR, "bolukbasi_per_word.png"), dpi=150)
+plt.savefig(os.path.join(FIGURES_DIR, "opt_bolukbasi_per_word.png"), dpi=150)
 plt.close()
 
 # Plot 3: IndirectBias heatmap
@@ -267,7 +272,7 @@ ax.set_ylabel("IndirectBias")
 ax.set_title("Bolukbasi IndirectBias for Profession Pairs\n(fraction of similarity explained by gender direction)")
 ax.legend()
 plt.tight_layout()
-plt.savefig(os.path.join(RESULTS_DIR, "bolukbasi_indirect_bias.png"), dpi=150)
+plt.savefig(os.path.join(FIGURES_DIR, "opt_bolukbasi_indirect_bias.png"), dpi=150)
 plt.close()
 
 print("Plots saved.")

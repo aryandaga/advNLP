@@ -1,6 +1,6 @@
 """
 LoRA Experiment: Bias Drift in OPT-1.3B After Fine-Tuning on SST-2
-Run with: ../venv/Scripts/python run_lora.py
+Run with: python src/training/train_lora.py
 """
 import os, sys, json, torch, numpy as np, pandas as pd
 import matplotlib
@@ -14,7 +14,14 @@ from transformers import (
 from peft import LoraConfig, get_peft_model, TaskType
 from datasets import load_dataset
 
-os.makedirs("../results", exist_ok=True)
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+PROCESSED_DIR = os.path.join(ROOT_DIR, "results", "processed", "opt_1.3b")
+FIGURES_DIR = os.path.join(ROOT_DIR, "results", "figures", "exploratory")
+ADAPTER_DIR = os.path.join(ROOT_DIR, "artifacts", "adapters", "opt_1.3b", "lora_adapter")
+
+os.makedirs(PROCESSED_DIR, exist_ok=True)
+os.makedirs(FIGURES_DIR, exist_ok=True)
+os.makedirs(ADAPTER_DIR, exist_ok=True)
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 MODEL_NAME = "facebook/opt-1.3b"
@@ -155,7 +162,7 @@ print(f"Training set: {len(train_tok)} examples")
 # ── 7. Fine-tune ──────────────────────────────────────────────────────────────
 print("\nFine-tuning with LoRA (2 epochs, lr=2e-4)...")
 args = TrainingArguments(
-    output_dir="../results/lora_adapter",
+    output_dir=ADAPTER_DIR,
     num_train_epochs=2,
     per_device_train_batch_size=8,
     gradient_accumulation_steps=2,
@@ -177,8 +184,8 @@ trainer = Trainer(
 result = trainer.train()
 print(f"Training loss: {result.training_loss:.4f}")
 
-lora_model.save_pretrained("../results/lora_adapter")
-tokenizer.save_pretrained("../results/lora_adapter")
+lora_model.save_pretrained(ADAPTER_DIR)
+tokenizer.save_pretrained(ADAPTER_DIR)
 
 # ── 8. Post-LoRA evaluation ───────────────────────────────────────────────────
 print("\n" + "="*55)
@@ -199,11 +206,11 @@ print("RESULTS SUMMARY")
 print("="*60)
 print(df.to_string())
 
-with open("../results/lora_results.json", "w") as f:
+with open(os.path.join(PROCESSED_DIR, "lora_results.json"), "w") as f:
     json.dump({"baseline_sst2": baseline_sst2, "lora_sst2": lora_sst2,
                "baseline_bbq": baseline_bbq,   "lora_bbq": lora_bbq}, f, indent=2)
-df.to_csv("../results/lora_results.csv")
-print("Saved -> ../results/lora_results.json  +  lora_results.csv")
+df.to_csv(os.path.join(PROCESSED_DIR, "lora_results.csv"))
+print(f"Saved -> {os.path.join(PROCESSED_DIR, 'lora_results.json')} + lora_results.csv")
 
 fig, axes = plt.subplots(1, 2, figsize=(11, 4.5))
 fig.suptitle("OPT-1.3B — LoRA Experiment", fontsize=13)
@@ -228,6 +235,7 @@ ax.set_ylim(-1, 1.2); ax.axhline(0, color="gray", ls="--", lw=0.8)
 ax.set_title("BBQ Gender Bias Metrics"); ax.legend()
 
 plt.tight_layout()
-plt.savefig("../results/lora_bias_plot.png", dpi=150, bbox_inches="tight")
-print("Plot saved -> ../results/lora_bias_plot.png")
+plot_path = os.path.join(FIGURES_DIR, "bbq_lora_bias_plot.png")
+plt.savefig(plot_path, dpi=150, bbox_inches="tight")
+print(f"Plot saved -> {plot_path}")
 print("\nDone.")

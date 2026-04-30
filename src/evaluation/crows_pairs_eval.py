@@ -11,7 +11,7 @@ Task 2 — SPS (Stereotype Preference Score):
   SPS = 100 * fraction_preferred  |  Ideal unbiased = 50%
 
 Task 3 — Bolukbasi Geometric SPS:
-  Reuses gender direction g from run_bolukbasi.py results.
+  Reuses the same gender-direction method as geometric_bias.py.
   For each pair, diff the changed words between sent_more and sent_less.
   Project those word representations onto g.
   Geometric SPS = % of pairs where changed words in sent_more project
@@ -27,8 +27,13 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 from sklearn.decomposition import PCA
 
-RESULTS_DIR = os.path.join(os.path.dirname(__file__), "..", "results")
-os.makedirs(RESULTS_DIR, exist_ok=True)
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+PROCESSED_DIR = os.path.join(ROOT_DIR, "results", "processed", "opt_1.3b")
+FIGURES_DIR = os.path.join(ROOT_DIR, "results", "figures", "exploratory")
+ADAPTERS_DIR = os.path.join(ROOT_DIR, "artifacts", "adapters", "opt_1.3b")
+
+os.makedirs(PROCESSED_DIR, exist_ok=True)
+os.makedirs(FIGURES_DIR, exist_ok=True)
 
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from peft import PeftModel
@@ -47,7 +52,7 @@ crows_gender = [r for r in all_rows if r["bias_type"] == "gender"]
 print(f"Gender subset: {len(crows_gender)} pairs")
 
 
-# ── Gender pairs (same as run_bolukbasi.py) ──────────────────────────────────
+# ── Gender pairs (same as geometric_bias.py) ─────────────────────────────────
 GENDER_PAIRS = [
     ("he","she"), ("him","her"), ("his","hers"), ("man","woman"),
     ("men","women"), ("boy","girl"), ("male","female"),
@@ -158,7 +163,7 @@ def analyse_model(model, tokenizer, label):
     return result
 
 
-# ── Load helpers (same pattern as run_bolukbasi.py) ──────────────────────────
+# ── Load helpers (same pattern as geometric_bias.py) ─────────────────────────
 def load_baseline():
     print("\nLoading baseline OPT-1.3B (fp16)...")
     tok = AutoTokenizer.from_pretrained(MODEL_NAME, padding_side="left")
@@ -203,18 +208,18 @@ m, tok = load_baseline()
 results["baseline"] = analyse_model(m, tok, "Baseline")
 free(m)
 
-lora_path  = os.path.join(RESULTS_DIR, "lora_adapter")
+lora_path  = os.path.join(ADAPTERS_DIR, "lora_adapter")
 m, tok     = load_lora(lora_path)
 results["post_lora"] = analyse_model(m, tok, "Post-LoRA")
 free(m)
 
-qlora_path = os.path.join(RESULTS_DIR, "qlora_adapter")
+qlora_path = os.path.join(ADAPTERS_DIR, "qlora_adapter")
 m, tok     = load_qlora(qlora_path)
 results["post_qlora"] = analyse_model(m, tok, "Post-QLoRA")
 free(m)
 
 # ── Save JSON ────────────────────────────────────────────────────────────────
-out_path = os.path.join(RESULTS_DIR, "crows_pairs_results.json")
+out_path = os.path.join(PROCESSED_DIR, "crows_pairs_results.json")
 with open(out_path, "w") as f:
     json.dump(results, f, indent=2)
 print(f"\nSaved results to {out_path}")
@@ -266,7 +271,7 @@ ax.set_title("Avg Projection onto Gender Direction\n(Bolukbasi, changed words on
 ax.legend(fontsize=8)
 
 plt.tight_layout()
-plt.savefig(os.path.join(RESULTS_DIR, "crows_pairs_results.png"), dpi=150, bbox_inches="tight")
+plt.savefig(os.path.join(FIGURES_DIR, "opt_crows_pairs_results.png"), dpi=150, bbox_inches="tight")
 plt.close()
 print("Plot saved.")
 
