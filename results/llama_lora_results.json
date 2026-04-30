@@ -1,0 +1,16 @@
+{
+  "model": "meta-llama/Llama-2-7b-hf",
+  "method": "LoRA",
+  "baseline": {
+    "sst2_accuracy": 0.835,
+    "crows_sps": 59.92,
+    "direct_bias_stereo": 0.2166,
+    "direct_bias_anti": 0.2311
+  },
+  "post_lora": {
+    "sst2_accuracy": 0.965,
+    "crows_sps": 61.45,
+    "direct_bias_stereo": 0.1948,
+    "direct_bias_anti": 0.21
+  }
+}
