@@ -1,0 +1,103 @@
+[{"stream_name":"stderr","time":6.338462261,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.338542413,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.338549101,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.338554803,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":6.952957564,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.95301535,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.953023534,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.953028391,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":38.482138008,"data":"`torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stderr","time":38.482202141,"data":"\n"}
+,{"stream_name":"stderr","time":38.482208121,"data":"`torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stdout","time":104.728594056,"data":"trainable params: 4,194,304 || all params: 6,742,609,920 || trainable%: 0.0622\n"}
+,{"stream_name":"stdout","time":135.987105352,"data":"Step 0 | Task: 21.3629 | Bias: 0.1469 | Total: 21.4363\n"}
+,{"stream_name":"stdout","time":136.282309194,"data":"🏆 New best model saved at step 0 (loss=21.4363)\n"}
+,{"stream_name":"stdout","time":136.964995806,"data":"🏆 New best model saved at step 1 (loss=19.6140)\n"}
+,{"stream_name":"stdout","time":137.972366986,"data":"🏆 New best model saved at step 3 (loss=18.5076)\n"}
+,{"stream_name":"stdout","time":138.650355761,"data":"🏆 New best model saved at step 4 (loss=14.3471)\n"}
+,{"stream_name":"stdout","time":139.264350091,"data":"🏆 New best model saved at step 5 (loss=12.3208)\n"}
+,{"stream_name":"stdout","time":139.877281118,"data":"🏆 New best model saved at step 6 (loss=8.7629)\n"}
+,{"stream_name":"stdout","time":140.5165166,"data":"🏆 New best model saved at step 7 (loss=5.2392)\n"}
+,{"stream_name":"stdout","time":141.14157445,"data":"🏆 New best model saved at step 8 (loss=3.2863)\n"}
+,{"stream_name":"stdout","time":141.755113904,"data":"🏆 New best model saved at step 9 (loss=2.3495)\n"}
+,{"stream_name":"stdout","time":142.358241553,"data":"🏆 New best model saved at step 10 (loss=2.1399)\n"}
+,{"stream_name":"stdout","time":144.16548373,"data":"🏆 New best model saved at step 14 (loss=1.9841)\n"}
+,{"stream_name":"stdout","time":145.960546778,"data":"🏆 New best model saved at step 18 (loss=1.7029)\n"}
+,{"stream_name":"stdout","time":146.967420388,"data":"🏆 New best model saved at step 20 (loss=1.5346)\n"}
+,{"stream_name":"stdout","time":147.580166224,"data":"🏆 New best model saved at step 21 (loss=1.4602)\n"}
+,{"stream_name":"stdout","time":149.720732983,"data":"🏆 New best model saved at step 26 (loss=1.2294)\n"}
+,{"stream_name":"stdout","time":151.502933315,"data":"🏆 New best model saved at step 30 (loss=1.0989)\n"}
+,{"stream_name":"stdout","time":154.077045131,"data":"🏆 New best model saved at step 36 (loss=1.0935)\n"}
+,{"stream_name":"stdout","time":154.682862443,"data":"🏆 New best model saved at step 37 (loss=0.8314)\n"}
+,{"stream_name":"stdout","time":155.319858138,"data":"🏆 New best model saved at step 38 (loss=0.6957)\n"}
+,{"stream_name":"stdout","time":159.457922353,"data":"🏆 New best model saved at step 48 (loss=0.5009)\n"}
+,{"stream_name":"stdout","time":168.362630729,"data":"🏆 New best model saved at step 70 (loss=0.4469)\n"}
+,{"stream_name":"stdout","time":171.704206612,"data":"🏆 New best model saved at step 78 (loss=0.3814)\n"}
+,{"stream_name":"stdout","time":176.286584259,"data":"🏆 New best model saved at step 89 (loss=0.3690)\n"}
+,{"stream_name":"stdout","time":179.358589408,"data":"🏆 New best model saved at step 96 (loss=0.3657)\n"}
+,{"stream_name":"stdout","time":180.967371395,"data":"Step 100 | Task: 0.3137 | Bias: 0.0476 | Total: 0.3375\n"}
+,{"stream_name":"stdout","time":181.168070813,"data":"🏆 New best model saved at step 100 (loss=0.3375)\n"}
+,{"stream_name":"stdout","time":201.463687058,"data":"🏆 New best model saved at step 150 (loss=0.2841)\n"}
+,{"stream_name":"stdout","time":221.707933525,"data":"Step 200 | Task: 0.6761 | Bias: 0.0300 | Total: 0.6911\n"}
+,{"stream_name":"stdout","time":263.763752781,"data":"Step 300 | Task: 0.5070 | Bias: 0.0214 | Total: 0.5177\n"}
+,{"stream_name":"stdout","time":307.673438551,"data":"Step 400 | Task: 0.4921 | Bias: 0.0165 | Total: 0.5004\n"}
+,{"stream_name":"stdout","time":341.494757177,"data":"🏆 New best model saved at step 474 (loss=0.2612)\n"}
+,{"stream_name":"stdout","time":353.121962543,"data":"Step 500 | Task: 1.4076 | Bias: 0.0293 | Total: 1.4222\n"}
+,{"stream_name":"stdout","time":397.812338957,"data":"Step 600 | Task: 0.7602 | Bias: 0.0197 | Total: 0.7701\n"}
+,{"stream_name":"stdout","time":442.754834089,"data":"Step 700 | Task: 0.5909 | Bias: 0.0139 | Total: 0.5979\n"}
+,{"stream_name":"stdout","time":487.551390083,"data":"Step 800 | Task: 0.7267 | Bias: 0.0174 | Total: 0.7354\n"}
+,{"stream_name":"stdout","time":532.400294165,"data":"Step 900 | Task: 0.5411 | Bias: 0.0107 | Total: 0.5464\n"}
+,{"stream_name":"stdout","time":577.218420621,"data":"Step 1000 | Task: 1.0091 | Bias: 0.0143 | Total: 1.0162\n"}
+,{"stream_name":"stdout","time":577.553210329,"data":"✅ Saved checkpoint at step 1000\n"}
+,{"stream_name":"stdout","time":618.731343502,"data":"📊 SPS at step 1000: 51.53\n"}
+,{"stream_name":"stdout","time":633.716939353,"data":"🏆 New best model saved at step 1033 (loss=0.2416)\n"}
+,{"stream_name":"stdout","time":663.721667106,"data":"Step 1100 | Task: 0.3188 | Bias: 0.0072 | Total: 0.3224\n"}
+,{"stream_name":"stdout","time":693.720507247,"data":"🏆 New best model saved at step 1166 (loss=0.2143)\n"}
+,{"stream_name":"stdout","time":708.918268335,"data":"Step 1200 | Task: 0.5295 | Bias: 0.0091 | Total: 0.5341\n"}
+,{"stream_name":"stdout","time":753.826354635,"data":"Step 1300 | Task: 0.4158 | Bias: 0.0067 | Total: 0.4191\n"}
+,{"stream_name":"stdout","time":798.56567877,"data":"Step 1400 | Task: 0.6771 | Bias: 0.0084 | Total: 0.6813\n"}
+,{"stream_name":"stdout","time":843.36941929,"data":"Step 1500 | Task: 1.0773 | Bias: 0.0122 | Total: 1.0834\n"}
+,{"stream_name":"stdout","time":888.105888421,"data":"Step 1600 | Task: 0.4930 | Bias: 0.0071 | Total: 0.4966\n"}
+,{"stream_name":"stdout","time":932.923414542,"data":"Step 1700 | Task: 0.7099 | Bias: 0.0081 | Total: 0.7140\n"}
+,{"stream_name":"stdout","time":977.970112602,"data":"Step 1800 | Task: 1.1657 | Bias: 0.0135 | Total: 1.1725\n"}
+,{"stream_name":"stdout","time":1022.798170686,"data":"Step 1900 | Task: 0.4842 | Bias: 0.0090 | Total: 0.4888\n"}
+,{"stream_name":"stdout","time":1067.612518247,"data":"Step 2000 | Task: 0.5598 | Bias: 0.0091 | Total: 0.5644\n"}
+,{"stream_name":"stdout","time":1067.907553663,"data":"✅ Saved checkpoint at step 2000\n"}
+,{"stream_name":"stdout","time":1108.391501552,"data":"📊 SPS at step 2000: 51.91\n"}
+,{"stream_name":"stdout","time":1152.980092225,"data":"Step 2100 | Task: 0.7583 | Bias: 0.0082 | Total: 0.7624\n"}
+,{"stream_name":"stdout","time":1197.788640598,"data":"Step 2200 | Task: 0.8328 | Bias: 0.0095 | Total: 0.8376\n"}
+,{"stream_name":"stdout","time":1242.490117008,"data":"Step 2300 | Task: 0.6237 | Bias: 0.0071 | Total: 0.6272\n"}
+,{"stream_name":"stdout","time":1287.239648921,"data":"Step 2400 | Task: 0.3314 | Bias: 0.0042 | Total: 0.3334\n"}
+,{"stream_name":"stdout","time":1331.907331482,"data":"Step 2500 | Task: 0.3604 | Bias: 0.0046 | Total: 0.3627\n"}
+,{"stream_name":"stdout","time":1376.729346675,"data":"Step 2600 | Task: 1.3147 | Bias: 0.0114 | Total: 1.3204\n"}
+,{"stream_name":"stdout","time":1421.438881243,"data":"Step 2700 | Task: 0.6470 | Bias: 0.0081 | Total: 0.6511\n"}
+,{"stream_name":"stdout","time":1466.237133505,"data":"Step 2800 | Task: 0.3441 | Bias: 0.0035 | Total: 0.3458\n"}
+,{"stream_name":"stdout","time":1510.963736867,"data":"Step 2900 | Task: 0.4949 | Bias: 0.0058 | Total: 0.4978\n"}
+,{"stream_name":"stdout","time":1555.865444633,"data":"Step 3000 | Task: 0.5271 | Bias: 0.0063 | Total: 0.5302\n"}
+,{"stream_name":"stdout","time":1556.145072156,"data":"✅ Saved checkpoint at step 3000\n"}
+,{"stream_name":"stdout","time":1596.501532861,"data":"📊 SPS at step 3000: 51.91\n"}
+,{"stream_name":"stdout","time":1641.13326064,"data":"Step 3100 | Task: 0.7635 | Bias: 0.0067 | Total: 0.7668\n"}
+,{"stream_name":"stdout","time":1685.967531858,"data":"Step 3200 | Task: 0.4808 | Bias: 0.0056 | Total: 0.4837\n"}
+,{"stream_name":"stdout","time":1730.687632029,"data":"Step 3300 | Task: 0.9154 | Bias: 0.0078 | Total: 0.9193\n"}
+,{"stream_name":"stdout","time":1775.459347229,"data":"Step 3400 | Task: 0.5280 | Bias: 0.0074 | Total: 0.5317\n"}
+,{"stream_name":"stdout","time":1820.343288269,"data":"Step 3500 | Task: 0.3688 | Bias: 0.0045 | Total: 0.3711\n"}
+,{"stream_name":"stdout","time":1865.074220849,"data":"Step 3600 | Task: 0.3670 | Bias: 0.0054 | Total: 0.3697\n"}
+,{"stream_name":"stdout","time":1909.788547678,"data":"Step 3700 | Task: 0.3578 | Bias: 0.0044 | Total: 0.3600\n"}
+,{"stream_name":"stdout","time":1954.756960806,"data":"Step 3800 | Task: 0.8656 | Bias: 0.0075 | Total: 0.8693\n"}
+,{"stream_name":"stdout","time":1999.589628749,"data":"Step 3900 | Task: 1.0314 | Bias: 0.0082 | Total: 1.0355\n"}
+,{"stream_name":"stdout","time":2044.295590382,"data":"Step 4000 | Task: 0.3799 | Bias: 0.0046 | Total: 0.3823\n"}
+,{"stream_name":"stdout","time":2044.652731213,"data":"✅ Saved checkpoint at step 4000\n"}
+,{"stream_name":"stdout","time":2084.627537998,"data":"📊 SPS at step 4000: 52.67\n"}
+,{"stream_name":"stdout","time":2084.627578702,"data":"⏹️ Reached max steps, stopping training.\n"}
+,{"stream_name":"stdout","time":2084.69843156,"data":"✅ Logs saved to CSV\n"}
+,{"stream_name":"stderr","time":2090.725649752,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":2090.725728659,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":2090.900845599,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":2090.900895518,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":2091.560373004,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":2091.964832676,"data":"[NbConvertApp] Writing 370318 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":2094.480489343,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":2095.436338251,"data":"[NbConvertApp] Support files will be in __results___files/\n"}
+,{"stream_name":"stderr","time":2095.436399649,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":2095.436808673,"data":"[NbConvertApp] Writing 547459 bytes to __results__.html\n"}
+]
