@@ -1,13 +1,16 @@
 """
 Llama-2-7B bias shift visualizations.
-Run with: python notebooks/plot_llama_results.py
+Run with: python src/plotting/plot_llama_results.py
 """
 import json, os
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
-RESULTS = os.path.join(os.path.dirname(__file__), "..", "results")
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+RESULTS = os.path.join(ROOT_DIR, "results", "processed", "llama2_7b")
+FIGURES = os.path.join(ROOT_DIR, "results", "figures", "paper")
+os.makedirs(FIGURES, exist_ok=True)
 
 with open(os.path.join(RESULTS, "llama_lora_results.json"))  as f: lora  = json.load(f)
 with open(os.path.join(RESULTS, "llama_qlora_results.json")) as f: qlora = json.load(f)
@@ -55,7 +58,7 @@ for b, v in zip(bars2, sps):
     ax2.text(b.get_x()+b.get_width()/2, v+0.2, f"{v:.1f}%", ha="center", fontsize=11, fontweight="bold")
 
 plt.tight_layout()
-plt.savefig(os.path.join(RESULTS, "llama_accuracy_vs_bias.png"), dpi=150, bbox_inches="tight")
+plt.savefig(os.path.join(FIGURES, "fig_llama_accuracy_vs_bias.png"), dpi=150, bbox_inches="tight")
 plt.close(); print("Saved llama_accuracy_vs_bias.png")
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -83,7 +86,7 @@ ax.set_ylabel("|cos(w, g)|  — gender alignment", fontsize=11)
 ax.set_ylim(0, 0.28)
 ax.legend(fontsize=10)
 plt.tight_layout()
-plt.savefig(os.path.join(RESULTS, "llama_directbias.png"), dpi=150, bbox_inches="tight")
+plt.savefig(os.path.join(FIGURES, "fig_llama_directbias.png"), dpi=150, bbox_inches="tight")
 plt.close(); print("Saved llama_directbias.png")
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -121,7 +124,7 @@ for b, v in zip(bars2, delta_change):
 ax.set_ylim(min(delta_change)-0.005, max(delta_change)+0.005)
 
 plt.tight_layout()
-plt.savefig(os.path.join(RESULTS, "llama_bias_drift.png"), dpi=150, bbox_inches="tight")
+plt.savefig(os.path.join(FIGURES, "fig_llama_bias_drift.png"), dpi=150, bbox_inches="tight")
 plt.close(); print("Saved llama_bias_drift.png")
 
 print("\nAll Llama-2-7B plots saved.")

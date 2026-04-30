@@ -5,7 +5,7 @@ Spawns both fine-tuning jobs simultaneously on separate A10G GPUs.
 Total cost: ~$2-2.50  |  Total wall time: ~60 min
 
 Run with:
-    modal run notebooks/modal_llama_all.py
+    modal run scripts/modal/run_llama_all.py
 """
 
 import modal

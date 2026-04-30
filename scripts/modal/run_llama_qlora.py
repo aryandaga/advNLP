@@ -8,7 +8,7 @@ Runs on Modal A10G GPU (24GB VRAM).
 - Bias eval: CrowS-Pairs SPS + Geometric SPS + Bolukbasi DirectBias
 
 Run with:
-    modal run notebooks/modal_llama_qlora.py
+    modal run scripts/modal/run_llama_qlora.py
 """
 
 import modal

@@ -11,7 +11,7 @@ Results are saved to a Modal Volume and also printed to stdout
 so you can copy them locally after the run.
 
 Run with:
-    modal run notebooks/modal_llama_lora.py
+    modal run scripts/modal/run_llama_lora.py
 """
 
 import modal
